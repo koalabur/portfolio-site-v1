@@ -1,8 +1,8 @@
 <template>
     <section class="intro">
-        <img class="intro__img" src="@/assets/img/koala-hero.png" width="423" height="385">
+        <img class="intro__img" src="img/koala-hero.png" width="423" height="385" />
         <h1 class="intro__title">i'm just a web guy doing web guy things</h1>
-        <img class="intro__img intro__img--mouse" src="@/assets/img/mouse-solid.svg">
+        <img class="intro__img intro__img--mouse" src="img/mouse-solid.svg" />
     </section>
 </template>
 
@@ -14,11 +14,11 @@
 
 <style lang="scss" scoped>
     .intro {
+        @include section-spacing;
         display: flex;
         flex-direction: column;
         align-items: center;
         padding-top: 7rem;
-        padding-bottom: 4rem;
         background: rgb(42,39,115);
         background: -moz-linear-gradient(180deg, rgba(42,39,115,1) 0%, rgba(28,18,64,1) 100%);
         background: -webkit-linear-gradient(180deg, rgba(42,39,115,1) 0%, rgba(28,18,64,1) 100%);
