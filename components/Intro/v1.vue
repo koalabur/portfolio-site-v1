@@ -2,13 +2,17 @@
     <section class="intro">
         <img class="intro__img" src="img/koala-hero.png" width="423" height="385" />
         <h1 class="intro__title">i'm just a web guy doing web guy things</h1>
-        <img class="intro__img intro__img--mouse" src="img/mouse-solid.svg" />
+        <img @click="scrollDown" class="intro__img intro__img--mouse" src="img/mouse-solid.svg" />
     </section>
 </template>
 
 <script>
     export default {
-        
+        methods: {
+            scrollDown() {
+                document.querySelector('[data-about]').scrollIntoView({behavior: "smooth"});
+            }
+        } 
     }
 </script>
 
