@@ -1,6 +1,6 @@
 <template>
-    <section class="portfolio" data-portfolio>
-        <h1 class="portfolio__title">< portfolio /></h1>
+    <section id="portfolio" class="portfolio" data-portfolio>
+        <h1 class="portfolio__title">{{ title }}</h1>
         <div class="portfolio__row">
             <div v-for="item in portfolios" :key="item.id">
                 <a class="portfolio__row-link" :href="item.link" target="_blank" rel="external">
@@ -16,6 +16,7 @@
     export default {
         data() {
             return {
+                title: '< portfolio />',
                 portfolios: [
                     {
                         id: 1,
@@ -39,7 +40,7 @@
                     }
                 ]
             }
-        }
+        },
     }
 </script>
 
