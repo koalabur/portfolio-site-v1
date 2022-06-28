@@ -1,27 +1,59 @@
 <template>
-  <div>
-    <Nav />
-    <Intro />
-    <About />
-    <Portfolio />
-    <Footer />
-  </div>
+    <div ref="site">
+        <SiteNavV1 :navList="navList" />
+        <IntroV1 ref="sectionIntro" />
+        <AboutV1 ref="sectionAbout" />
+        <PortfolioV1 ref="sectionPortfolio" />
+        <SiteFooterV1 />
+    </div>
 </template>
 
 <script>
-import Nav from '@/components/Nav/v1.vue';
-import Intro from '@/components/Intro/v1.vue';
-import About from '@/components/About/v1.vue';
-import Portfolio from '@/components/Portfolio/v1.vue';
-import Footer from '@/components/Footer/v1.vue';
 export default {
-  components: {
-    Nav,
-    Intro,
-    About,
-    Portfolio,
-    Footer
-  },
-  name: 'IndexPage'
-}
+    data() {
+        return {
+            observer: null,
+            observerOptions: {
+                root: this.$el,
+                rootMargin: "0px",
+            },
+            navList: [
+                {
+                    id: "about",
+                    title: "About",
+                    isActive: false,
+                },
+                {
+                    id: "portfolio",
+                    title: "Portfolio",
+                    isActive: false,
+                },
+            ],
+        };
+    },
+    beforeMount() {
+        this.observer = new IntersectionObserver(this.onElementObserved, this.observerOptions);
+    },
+    mounted() {
+        this.observeSections(['sectionPortfolio', 'sectionAbout', 'sectionIntro'])
+    },
+    beforeDestroy() {
+        this.observer.disconnect();
+    },
+    methods: {
+        onElementObserved(entries) {
+            entries.forEach(({ intersectionRatio, target }) => {
+                if (intersectionRatio > 0) {
+                    this.navList.forEach((listItem, i, list) => {
+                        const isActive = listItem.id === target.id ? true : false
+                        this.navList[i].isActive = isActive
+                    })
+                }
+            });
+        },
+        observeSections(sectionList) {
+            sectionList.forEach((section) => this.observer.observe(this.$refs[section].$el))
+        }
+    },
+};
 </script>
